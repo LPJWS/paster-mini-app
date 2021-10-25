@@ -93,7 +93,7 @@ const Top = props => {
 										disabled
 										key={paste.id} 
 										style={{marginBottom: ".5rem"}}
-										description={"Всего оценок: " + paste.cnt + ', рейтинг: ' + paste.avg}
+										description={"Всего оценок: " + paste.cnt + ', рейтинг: ' + paste.rating}
 										before={<Cell disabled>{index+1}</Cell>}
 									>
 										{paste.anno} 
