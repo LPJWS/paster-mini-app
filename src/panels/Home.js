@@ -86,14 +86,6 @@ const Home = ({ id, go, fetchedUser }) => {
 		<View activePanel={id} popout={popout}>
 			<Panel id={id}>
 				<PanelHeader>ПАСТЕР</PanelHeader>
-				{/* <Group header={<Header mode="secondary">Это ты</Header>}>
-					<Cell
-						before={fetchedUser.photo_200 ? <Avatar src={fetchedUser.photo_200}/> : null}
-						description={fetchedUser.city && fetchedUser.city.title ? fetchedUser.city.title : ''}
-					>
-						{`${fetchedUser.first_name} ${fetchedUser.last_name}`}
-					</Cell>
-				</Group> */}
 				{paste && 
 					<Group header={<Header mode="secondary">Данную пасту оценили {paste.cnt} раз, рейтинг - {paste.rating}</Header>}>
 						<Div>
