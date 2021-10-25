@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { func } from 'prop-types';
+import bridge from '@vkontakte/vk-bridge';
 
 import { Panel, PanelHeader, Header, Button, Group, Cell, Div, ScreenSpinner, Text, Avatar, Card, Snackbar, FixedLayout, Separator, View } from '@vkontakte/vkui';
+import { Icon16ReplyOutline } from '@vkontakte/icons';
+import { Icon28Dice5Outline } from '@vkontakte/icons';
+import { Icon28ViewOutline } from '@vkontakte/icons';
+
+import { Icon16Favorite } from '@vkontakte/icons';
 
 const Home = ({ id, go, fetchedUser }) => {
 	const [ paste, setPaste] = useState(null);
@@ -67,6 +73,10 @@ const Home = ({ id, go, fetchedUser }) => {
 		  })
 	}
 
+	function reply() {
+		bridge.send("VKWebAppShare", {"link": paste.link});
+	}
+
 	useEffect(() => {
 		getPaste()
 	  }, [])
@@ -91,21 +101,26 @@ const Home = ({ id, go, fetchedUser }) => {
 							</Card>
 						</Div>
 						<Group header={<Header mode="secondary">Оцените пасту</Header>}>
-							<Div style={{display: 'flex', paddingBottom: '9rem'}}>
+							<Div style={{display: 'flex'}}>
 								<Button stretched size="l" style={{ marginRight: 8 }} mode="destructive" onClick={() => {relatePaste(1)}}>
-									1
+									1 <Icon16Favorite/>
 								</Button>
 								<Button stretched size="l" style={{ marginRight: 8 }} mode="destructive" onClick={() => {relatePaste(2)}}>
-									2
+									2 <Icon16Favorite/>
 								</Button>
 								<Button stretched size="l" style={{ marginRight: 8 }} mode="secondary" onClick={() => {relatePaste(3)}}>
-									3
+									3 <Icon16Favorite/>
 								</Button>
 								<Button stretched size="l" style={{ marginRight: 8 }} mode="commerce" onClick={() => {relatePaste(4)}}>
-									4
+									4 <Icon16Favorite/>
 								</Button>
 								<Button stretched size="l" style={{ marginRight: 8 }} mode="commerce" onClick={() => {relatePaste(5)}}>
-									5
+									5 <Icon16Favorite/>
+								</Button>
+							</Div>
+							<Div style={{paddingBottom: '9rem'}}>
+								<Button stretched size="l" style={{ marginRight: 8 }} mode="primary" onClick={() => {reply()}} before={<Icon16ReplyOutline/>}>
+									Поделиться
 								</Button>
 							</Div>
 						</Group>
@@ -113,17 +128,11 @@ const Home = ({ id, go, fetchedUser }) => {
 							<Group header={<Header mode="secondary">Получить пасту</Header>}>
 								<Div style={{display: 'flex'}}>
 									<Button stretched size="l" style={{ marginRight: 8 }} mode="secondary" onClick={
-										() => {
-											getRandPaste()
-										}
-									}>
+										() => {getRandPaste()}} before={<Icon28Dice5Outline/>}>
 										Случайная паста
 									</Button>
 									<Button stretched size="l" mode="secondary" onClick={
-										() => {
-											getPaste()
-										}
-									}>
+										() => {getPaste()}} before={<Icon28ViewOutline/>}>
 										Неоцененная паста
 									</Button>
 								</Div>
