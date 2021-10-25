@@ -9,6 +9,7 @@ import Top from './panels/Top';
 const App = () => {
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
+	const [pastePreloaded, setPastePreloaded] = useState(null);
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
 
 	useEffect(() => {
@@ -29,13 +30,14 @@ const App = () => {
 
 	const go = e => {
 		setActivePanel(e.currentTarget.dataset.to);
+		setPastePreloaded(e.currentTarget.dataset.payload)
 	};
 
 	return (
 		<AdaptivityProvider>
 			<AppRoot>
 				<View activePanel={activePanel} popout={popout}>
-					{fetchedUser && <Home id='home' fetchedUser={fetchedUser} go={go} />}
+					{fetchedUser && <Home id='home' fetchedUser={fetchedUser} go={go} pastePreloaded={pastePreloaded}/>}
 					{fetchedUser && <Top id='top' fetchedUser={fetchedUser} go={go}/> }
 				</View>
 			</AppRoot>

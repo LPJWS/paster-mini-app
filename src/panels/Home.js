@@ -10,7 +10,7 @@ import { Icon16Mention } from '@vkontakte/icons';
 import { Icon24CupOutline } from '@vkontakte/icons';
 import { Icon16Favorite } from '@vkontakte/icons';
 
-const Home = ({ id, go, fetchedUser }) => {
+const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 	const [ paste, setPaste] = useState(null);
 	const [ snackbar, setSnackbar] = useState(null);
 	const [ popout, setPopout] = useState(null);
@@ -35,6 +35,23 @@ const Home = ({ id, go, fetchedUser }) => {
 	async function getPaste() {
 		setPopout(<ScreenSpinner/>)
 		fetch('https://lpjakewolfskin.ru/api/v1/paste/get/unrelated/?vk_id=' + fetchedUser.id)
+		  .then(response => {
+				if (!response.ok) {
+					throw new Error(response.statusText)
+				}
+				return response.json()
+				}).catch(err=>{
+				console.log(err)
+			})
+		  .then(paste => {
+			setPopout(null)
+			setPaste(paste)
+		  })
+	}
+
+	function getPasteById(paste_id) {
+		setPopout(<ScreenSpinner/>)
+		fetch('https://lpjakewolfskin.ru/api/v1/paste/get/' + paste_id + '/')
 		  .then(response => {
 				if (!response.ok) {
 					throw new Error(response.statusText)
@@ -79,7 +96,12 @@ const Home = ({ id, go, fetchedUser }) => {
 	}
 
 	useEffect(() => {
-		getPaste()
+		if (pastePreloaded) {
+			getPasteById(pastePreloaded)
+		}
+		else {
+			getPaste()
+		}
 	  }, [])
 
 	return (

@@ -90,7 +90,9 @@ const Top = props => {
 							pastes.map( (paste, index) => {
 								return (
 									<Cell
-										disabled
+										onClick={props.go}
+										data-to="home"
+										data-payload={paste.id}
 										key={paste.id} 
 										style={{marginBottom: ".5rem"}}
 										description={"Всего оценок: " + paste.cnt + ', рейтинг: ' + paste.rating}
