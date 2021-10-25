@@ -36,6 +36,7 @@ const App = () => {
 			<AppRoot>
 				<View activePanel={activePanel} popout={popout}>
 					{fetchedUser && <Home id='home' fetchedUser={fetchedUser} go={go} />}
+					{fetchedUser && <Top id='top' fetchedUser={fetchedUser} go={go}/> }
 				</View>
 			</AppRoot>
 		</AdaptivityProvider>

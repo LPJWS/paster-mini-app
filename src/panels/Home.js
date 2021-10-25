@@ -6,7 +6,8 @@ import { Panel, PanelHeader, Header, Button, Group, Cell, Div, ScreenSpinner, Te
 import { Icon16ReplyOutline } from '@vkontakte/icons';
 import { Icon28Dice5Outline } from '@vkontakte/icons';
 import { Icon28ViewOutline } from '@vkontakte/icons';
-
+import { Icon16Mention } from '@vkontakte/icons';
+import { Icon24CupOutline } from '@vkontakte/icons';
 import { Icon16Favorite } from '@vkontakte/icons';
 
 const Home = ({ id, go, fetchedUser }) => {
@@ -118,9 +119,14 @@ const Home = ({ id, go, fetchedUser }) => {
 									5 <Icon16Favorite/>
 								</Button>
 							</Div>
-							<Div style={{paddingBottom: '9rem'}}>
+							<Div>
 								<Button stretched size="l" style={{ marginRight: 8 }} mode="primary" onClick={() => {reply()}} before={<Icon16ReplyOutline/>}>
 									Поделиться
+								</Button>
+							</Div>
+							<Div style={{paddingBottom: '9rem'}}>
+								<Button stretched size="l" style={{ marginRight: 8 }} mode="primary" onClick={go} data-to="top" before={<Icon24CupOutline/>}>
+									Открыть ТОП
 								</Button>
 							</Div>
 						</Group>
