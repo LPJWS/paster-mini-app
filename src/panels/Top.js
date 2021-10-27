@@ -93,6 +93,9 @@ const Top = props => {
               	</Tabs>
 				<Group header={<Header mode="secondary">Это ты</Header>}>
 					<Cell
+						onClick={props.go}
+						data-to="marks"
+						data-member={you ? you.vk_id : ""}
 						before={props.fetchedUser.photo_200 ? <Avatar src={props.fetchedUser.photo_200}/> : null}
 						description={you ? "Всего оценок: " + you.cnt + ', средняя: ' + you.avg : ""}
 					>
