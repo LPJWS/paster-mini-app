@@ -93,6 +93,8 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 
 	function reply() {
 		bridge.send("VKWebAppShare", {"link": paste.link});
+
+		// bridge.send("VKWebAppShowWallPostBox", {"message": "Hello!", "attachments": "wall-"+paste.group+"_"+paste.post});
 	}
 
 	useEffect(() => {

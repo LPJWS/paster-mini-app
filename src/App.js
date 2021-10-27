@@ -5,11 +5,13 @@ import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './panels/Home';
 import Top from './panels/Top';
+import Marks from './panels/Marks';
 
 const App = () => {
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
 	const [pastePreloaded, setPastePreloaded] = useState(null);
+	const [member, setMember] = useState(null);
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
 
 	useEffect(() => {
@@ -31,6 +33,7 @@ const App = () => {
 	const go = e => {
 		setActivePanel(e.currentTarget.dataset.to);
 		setPastePreloaded(e.currentTarget.dataset.payload)
+		setMember(e.currentTarget.dataset.member)
 	};
 
 	return (
@@ -39,6 +42,7 @@ const App = () => {
 				<View activePanel={activePanel} popout={popout}>
 					{fetchedUser && <Home id='home' fetchedUser={fetchedUser} go={go} pastePreloaded={pastePreloaded}/>}
 					{fetchedUser && <Top id='top' fetchedUser={fetchedUser} go={go}/> }
+					<Marks id='marks' go={go} member={member}/>
 				</View>
 			</AppRoot>
 		</AdaptivityProvider>

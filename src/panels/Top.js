@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import bridge from '@vkontakte/vk-bridge';
 
-import { Panel, PanelHeader, PanelHeaderBack, Group, Header, View, ScreenSpinner, Div, Card, Cell, Avatar } from '@vkontakte/vkui';
+import { Panel, PanelHeader, PanelHeaderBack, Group, Header, View, ScreenSpinner, Div, Card, Cell, Avatar, Tabs, TabsItem } from '@vkontakte/vkui';
 
 import './Top.css';
 
@@ -11,6 +11,7 @@ const Top = props => {
 	const [users, setUsers] = useState([])
 	const [you, setYou] = useState(null);
 	const [popout, setPopout] = useState(null);
+	const [activeTab, setActiveTab] = useState('paste');
 
 
 	function getTop() {
@@ -76,6 +77,20 @@ const Top = props => {
 				>
 					ТОП
 				</PanelHeader>
+				<Tabs>
+					<TabsItem
+						onClick={() => setActiveTab('paste')}
+						selected={activeTab === 'paste'}
+					>
+						Пасты
+					</TabsItem>
+					<TabsItem
+						onClick={() => setActiveTab('member')}
+						selected={activeTab === 'member'}
+					>
+						Пользователи
+					</TabsItem>
+              	</Tabs>
 				<Group header={<Header mode="secondary">Это ты</Header>}>
 					<Cell
 						before={props.fetchedUser.photo_200 ? <Avatar src={props.fetchedUser.photo_200}/> : null}
@@ -84,7 +99,7 @@ const Top = props => {
 						{`${props.fetchedUser.first_name} ${props.fetchedUser.last_name}`}
 					</Cell>
 				</Group>
-				<Group header={<Header mode="secondary">ТОП паст</Header>}>
+				{activeTab === 'paste' && <Group header={<Header mode="secondary">ТОП паст</Header>}>
 					<Div>
 						{
 							pastes.map( (paste, index) => {
@@ -104,14 +119,16 @@ const Top = props => {
 							})
 						}
 					</Div>
-				</Group>
-				<Group header={<Header mode="secondary">ТОП пользователей</Header>}>
+				</Group>}
+				{activeTab === 'member' && <Group header={<Header mode="secondary">ТОП пользователей</Header>}>
 					<Div>
 						{
 							users.map( (user, index) => {
 								return (
 									<Cell
-										disabled
+										onClick={props.go}
+										data-to="marks"
+										data-member={user.vk_id}
 										key={user.id} 
 										style={{marginBottom: ".5rem"}}
 										description={"Всего оценок: " + user.cnt + ', средняя: ' + user.avg}
@@ -123,7 +140,7 @@ const Top = props => {
 							})
 						}
 					</Div>
-				</Group>
+				</Group>}
 			</Panel>
 		</View>
 	)
