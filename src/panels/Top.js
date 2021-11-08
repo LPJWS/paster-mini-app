@@ -108,8 +108,8 @@ const Top = props => {
 							pastes.map( (paste, index) => {
 								return (
 									<Cell
-										onClick={props.go}
-										data-to="home"
+										onClick={props.gopanel}
+										data-story="paste"
 										data-payload={paste.id}
 										key={paste.id} 
 										style={{marginBottom: ".5rem"}}
