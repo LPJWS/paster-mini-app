@@ -149,7 +149,39 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 								<Card size="l" mode="shadow" style={{marginBottom:'1rem'}}>
 									<Div style={{padding: '.5rem', margin: 'auto'}}>
 										<p>{paste.clear_text}</p>
-										<img style={{width: "100%", height: "100%"}} src={paste.pic_link} />
+										{paste.pic &&
+											<img style={{width: "100%", height: "100%"}} src={paste.pic_link} onClick={async() => {
+												let res = await bridge.send("VKWebAppGetAuthToken", {"app_id": 7983387, "scope": "photos"});
+												let owner_id = paste.pic.split('_')[0].split('photo')[1]
+												let photo_id = paste.pic.split('_')[1].slice(0, -1)
+												let res2 = await bridge.send("VKWebAppCallAPIMethod", {"method": "photos.copy", "request_id": "32test", "params": {"owner_id": owner_id, "photo_id": photo_id, "v":"5.131", "access_token":res.access_token}});
+												if (!res2.error_type) {
+													setSnackbar(
+														<Snackbar
+															onClose={() => setSnackbar(null)}
+															after={<IconButton onClick={() => setSnackbar(null)}><Icon16Clear /></IconButton>}
+														>
+															Пикча добавлена в Сохраненные
+														</Snackbar>
+													)
+												}
+												else {
+													setSnackbar(
+														<Snackbar
+															onClose={() => setSnackbar(null)}
+															after={<IconButton onClick={() => setSnackbar(null)}><Icon16Clear /></IconButton>}
+														>
+															Произошла ошибка
+														</Snackbar>
+													)
+												}
+											}}/>
+										}
+										{paste.pic &&
+											<Div style={{textAlign: "center", color: "gray"}}>
+												Нажми на пикчу, чтобы добавить ее в свои Сохраненки
+											</Div>
+										}
 									</Div>
 									
 								</Card>
@@ -181,11 +213,6 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 										Поделиться
 									</Button>
 								</Div>
-								{/* <Div style={{paddingBottom: '9rem'}}>
-									<Button stretched size="l" style={{ marginRight: 8 }} mode="primary" onClick={go} data-to="top" before={<Icon24CupOutline/>}>
-										Открыть ТОП
-									</Button>
-								</Div> */}
 							</Group>
 							<FixedLayout filled vertical="bottom">
 								<Group header={<Header mode="secondary">Получить пасту</Header>}>
