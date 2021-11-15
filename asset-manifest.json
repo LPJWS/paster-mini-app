@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/paster-mini-app/static/css/main.6db70df8.chunk.css",
-    "main.js": "/paster-mini-app/static/js/main.a232187a.chunk.js",
-    "main.js.map": "/paster-mini-app/static/js/main.a232187a.chunk.js.map",
+    "main.css": "/paster-mini-app/static/css/main.ff9be8f5.chunk.css",
+    "main.js": "/paster-mini-app/static/js/main.52131bf2.chunk.js",
+    "main.js.map": "/paster-mini-app/static/js/main.52131bf2.chunk.js.map",
     "runtime-main.js": "/paster-mini-app/static/js/runtime-main.b6510f22.js",
     "runtime-main.js.map": "/paster-mini-app/static/js/runtime-main.b6510f22.js.map",
     "static/css/2.a2ab3232.chunk.css": "/paster-mini-app/static/css/2.a2ab3232.chunk.css",
-    "static/js/2.7e30ea9c.chunk.js": "/paster-mini-app/static/js/2.7e30ea9c.chunk.js",
-    "static/js/2.7e30ea9c.chunk.js.map": "/paster-mini-app/static/js/2.7e30ea9c.chunk.js.map",
+    "static/js/2.36fa773e.chunk.js": "/paster-mini-app/static/js/2.36fa773e.chunk.js",
+    "static/js/2.36fa773e.chunk.js.map": "/paster-mini-app/static/js/2.36fa773e.chunk.js.map",
     "index.html": "/paster-mini-app/index.html",
     "static/css/2.a2ab3232.chunk.css.map": "/paster-mini-app/static/css/2.a2ab3232.chunk.css.map",
-    "static/css/main.6db70df8.chunk.css.map": "/paster-mini-app/static/css/main.6db70df8.chunk.css.map",
-    "static/js/2.7e30ea9c.chunk.js.LICENSE.txt": "/paster-mini-app/static/js/2.7e30ea9c.chunk.js.LICENSE.txt"
+    "static/css/main.ff9be8f5.chunk.css.map": "/paster-mini-app/static/css/main.ff9be8f5.chunk.css.map",
+    "static/js/2.36fa773e.chunk.js.LICENSE.txt": "/paster-mini-app/static/js/2.36fa773e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b6510f22.js",
     "static/css/2.a2ab3232.chunk.css",
-    "static/js/2.7e30ea9c.chunk.js",
-    "static/css/main.6db70df8.chunk.css",
-    "static/js/main.a232187a.chunk.js"
+    "static/js/2.36fa773e.chunk.js",
+    "static/css/main.ff9be8f5.chunk.css",
+    "static/js/main.52131bf2.chunk.js"
   ]
 }
