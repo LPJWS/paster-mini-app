@@ -4,7 +4,7 @@ import bridge from '@vkontakte/vk-bridge';
 
 import { Panel, PanelHeader, Header, Button, Group, Cell, Div, ScreenSpinner,
 	 Text, Avatar, Card, Snackbar, FixedLayout, Separator, View,
-	Epic, Tabbar, TabbarItem } from '@vkontakte/vkui';
+	Epic, Tabbar, TabbarItem, IconButton } from '@vkontakte/vkui';
 import { Icon16ReplyOutline } from '@vkontakte/icons';
 import { Icon28Dice5Outline } from '@vkontakte/icons';
 import { Icon28ViewOutline } from '@vkontakte/icons';
@@ -13,6 +13,7 @@ import { Icon24CupOutline } from '@vkontakte/icons';
 import { Icon16Favorite } from '@vkontakte/icons';
 import { Icon28HomeOutline } from '@vkontakte/icons';
 import { Icon28Flash } from '@vkontakte/icons';
+import { Icon16Clear } from '@vkontakte/icons';
 
 import Top from './Top';
 
@@ -99,6 +100,7 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 			setSnackbar(
 				<Snackbar
 					onClose={() => setSnackbar(null)}
+					after={<IconButton onClick={() => setSnackbar(null)}><Icon16Clear /></IconButton>}
 				>
 					Паста оценена
 				</Snackbar>

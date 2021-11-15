@@ -72,9 +72,7 @@ const Top = props => {
 	return (
 		<View activePanel={props.id} popout={popout}>
 			<Panel id={props.id}>
-				<PanelHeader
-					left={<PanelHeaderBack onClick={props.go} data-to="home"/>}
-				>
+				<PanelHeader>
 					ТОП
 				</PanelHeader>
 				<Tabs>
