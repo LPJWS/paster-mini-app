@@ -31,7 +31,7 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 	
 	function getRandPaste() {
 		setPopout(<ScreenSpinner/>)
-		fetch('https://lpjakewolfskin.ru/api/v1/paste/get/rand/')
+		fetch('https://lpjakewolfskin.ru/api/v1/paste/get/rand/?vk_id=' + fetchedUser.id)
 		  .then(response => {
 				if (!response.ok) {
 					throw new Error(response.statusText)
@@ -48,8 +48,6 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 
 	async function getPaste() {
 		setPopout(<ScreenSpinner/>)
-		// const params = window.location.search.slice(1);
-		// console.log(params);
 		fetch('https://lpjakewolfskin.ru/api/v1/paste/get/unrelated/?vk_id=' + fetchedUser.id)
 		  .then(response => {
 				if (!response.ok) {
@@ -191,23 +189,28 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 								
 							</Div>
 							<Group header={<Header mode="secondary">Оцените пасту</Header>}>
-								<Div style={{display: 'flex'}}>
-									<Button stretched size="l" style={{ marginRight: 8 }} mode="destructive" onClick={() => {relatePaste(1)}}>
-										1 <Icon16Favorite/>
-									</Button>
-									<Button stretched size="l" style={{ marginRight: 8 }} mode="destructive" onClick={() => {relatePaste(2)}}>
-										2 <Icon16Favorite/>
-									</Button>
-									<Button stretched size="l" style={{ marginRight: 8 }} mode="secondary" onClick={() => {relatePaste(3)}}>
-										3 <Icon16Favorite/>
-									</Button>
-									<Button stretched size="l" style={{ marginRight: 8 }} mode="commerce" onClick={() => {relatePaste(4)}}>
-										4 <Icon16Favorite/>
-									</Button>
-									<Button stretched size="l" style={{ marginRight: 8 }} mode="commerce" onClick={() => {relatePaste(5)}}>
-										5 <Icon16Favorite/>
-									</Button>
-								</Div>
+								{!paste.related &&
+									<Div style={{display: 'flex'}}>
+										<Button stretched size="l" style={{ marginRight: 8 }} mode="destructive" onClick={() => {relatePaste(1)}}>
+											1 <Icon16Favorite/>
+										</Button>
+										<Button stretched size="l" style={{ marginRight: 8 }} mode="destructive" onClick={() => {relatePaste(2)}}>
+											2 <Icon16Favorite/>
+										</Button>
+										<Button stretched size="l" style={{ marginRight: 8 }} mode="secondary" onClick={() => {relatePaste(3)}}>
+											3 <Icon16Favorite/>
+										</Button>
+										<Button stretched size="l" style={{ marginRight: 8 }} mode="commerce" onClick={() => {relatePaste(4)}}>
+											4 <Icon16Favorite/>
+										</Button>
+										<Button stretched size="l" style={{ marginRight: 8 }} mode="commerce" onClick={() => {relatePaste(5)}}>
+											5 <Icon16Favorite/>
+										</Button>
+									</Div>
+								}
+								{paste.related &&
+									<Div style={{textAlign: "center", color: "gray"}}>Вы уже оценивали данную пасту</Div>
+								}
 								<Div style={{paddingBottom: '9rem'}}>
 									<Button stretched size="l" style={{ marginRight: 8 }} mode="primary" onClick={() => {reply()}} before={<Icon16ReplyOutline/>}>
 										Поделиться
