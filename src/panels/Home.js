@@ -142,7 +142,7 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 				<Panel id='paste'>
 					<PanelHeader>ПАСТЕР</PanelHeader>
 					{paste && 
-						<Group header={<Header mode="secondary">Данную пасту оценили {paste.cnt} раз, рейтинг - {paste.rating} {paste.sender ? 'Пасту прислал ' + paste.sender.name : ''}</Header>}>
+						<Group header={<Header mode="secondary">Данную пасту оценили {paste.cnt} раз, рейтинг - {paste.rating} {paste.sender ? '\n, прислал ' + paste.sender.name : ''}</Header>}>
 							<Div>
 								<Card size="l" mode="shadow" style={{marginBottom:'1rem'}}>
 									<Div style={{padding: '.5rem', margin: 'auto'}}>
