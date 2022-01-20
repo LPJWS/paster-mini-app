@@ -14,6 +14,24 @@ const App = () => {
 	const [member, setMember] = useState(null);
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
 
+	let hash = window.location.hash.replace('#', '')
+	if (hash) {
+		// fetch('https://lpjakewolfskin.ru/api/v1/paste/get/'+hash)
+		// 	.then(response => {
+		// 		if (!response.ok) {
+		// 			throw new Error(response.statusText)
+		// 		}
+		// 		return response.json()
+		// 		}).catch(err=>{
+		// 		console.log(err)
+		// 	})
+		// 	.then((check_) => {
+		// 		setPastePreloaded(hash)
+		// 	})
+		window.location.hash = ''
+		setPastePreloaded(hash)
+	}
+
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
 			if (type === 'VKWebAppUpdateConfig') {
