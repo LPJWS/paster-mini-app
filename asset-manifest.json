@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/paster-mini-app/static/css/main.ff9be8f5.chunk.css",
-    "main.js": "/paster-mini-app/static/js/main.d3631cd1.chunk.js",
-    "main.js.map": "/paster-mini-app/static/js/main.d3631cd1.chunk.js.map",
+    "main.js": "/paster-mini-app/static/js/main.7cc2a369.chunk.js",
+    "main.js.map": "/paster-mini-app/static/js/main.7cc2a369.chunk.js.map",
     "runtime-main.js": "/paster-mini-app/static/js/runtime-main.b6510f22.js",
     "runtime-main.js.map": "/paster-mini-app/static/js/runtime-main.b6510f22.js.map",
     "static/css/2.a2ab3232.chunk.css": "/paster-mini-app/static/css/2.a2ab3232.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.a2ab3232.chunk.css",
     "static/js/2.497bb289.chunk.js",
     "static/css/main.ff9be8f5.chunk.css",
-    "static/js/main.d3631cd1.chunk.js"
+    "static/js/main.7cc2a369.chunk.js"
   ]
 }
