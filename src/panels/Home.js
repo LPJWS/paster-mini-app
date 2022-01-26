@@ -14,11 +14,14 @@ import { Icon16Favorite } from '@vkontakte/icons';
 import { Icon28HomeOutline } from '@vkontakte/icons';
 import { Icon28Flash } from '@vkontakte/icons';
 import { Icon16Clear } from '@vkontakte/icons';
+import { Icon28KeyOutline } from '@vkontakte/icons';
 
 import Top from './Top';
+import Moderator from './Moderator';
 
 const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 	const [ paste, setPaste] = useState(null);
+	const [you, setYou] = useState(null);
 	const [ snackbar, setSnackbar] = useState(null);
 	const [ popout, setPopout] = useState(null);
 	const [activeStory, setActiveStory] = React.useState('paste');
@@ -80,6 +83,24 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 		  })
 	}
 
+	function getYou() {
+		setPopout(<ScreenSpinner/>)
+
+		fetch('https://lpjakewolfskin.ru/api/v1/member/get_vk/' + fetchedUser.id)
+		  .then(response => {
+				if (!response.ok) {
+					throw new Error(response.statusText)
+				}
+				return response.json()
+				}).catch(err=>{
+				console.log(err)
+			})
+		  .then(you => {
+			setPopout(null)
+			setYou(you)
+		  })
+	}
+
 	function relatePaste(mark) {
 		fetch('https://lpjakewolfskin.ru/api/v1/paste/relate/', {
 			method: 'POST',
@@ -108,8 +129,6 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 
 	function reply() {
 		bridge.send("VKWebAppShare", {"link": paste.link});
-
-		// bridge.send("VKWebAppShowWallPostBox", {"message": "Hello!", "attachments": "wall-"+paste.group+"_"+paste.post});
 	}
 
 	useEffect(() => {
@@ -119,6 +138,7 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 		else {
 			getPaste()
 		}
+		getYou()
 	  }, [])
 
 	return (
@@ -136,6 +156,14 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 				data-story="top"
 				text="ТОП"
 			  ><Icon28Flash/></TabbarItem>
+			  {you && you.is_moder &&
+			  <TabbarItem
+				onClick={onStoryChange}
+				selected={activeStory === 'moderator'}
+				data-story="moderator"
+				text="Модерация"
+			  ><Icon28KeyOutline /></TabbarItem>
+			  }
 			</Tabbar>
 		}>
 			<View id='paste' activePanel='paste' popout={popout}>
@@ -237,8 +265,9 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 					{snackbar}
 				</Panel>
 			</View>
-
-			<Top id='top' fetchedUser={fetchedUser} go={go} gopanel={onStoryChange}/>
+			
+			<Top id='top' activePanel='top' fetchedUser={fetchedUser} go={go}/>
+			<Moderator id='moderator' activePanel='moderator' fetchedUser={fetchedUser} go={go}/>
 
 		</Epic>
 	)

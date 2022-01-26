@@ -6,6 +6,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Home from './panels/Home';
 import Top from './panels/Top';
 import Marks from './panels/Marks';
+import Moderator from './panels/Moderator'
 
 const App = () => {
 	const [activePanel, setActivePanel] = useState('home');
@@ -60,6 +61,7 @@ const App = () => {
 				<View activePanel={activePanel} popout={popout}>
 					{fetchedUser && <Home id='home' fetchedUser={fetchedUser} go={go} pastePreloaded={pastePreloaded}/>}
 					{fetchedUser && <Top id='top' fetchedUser={fetchedUser} go={go}/> }
+					{fetchedUser && <Moderator id='moderator' fetchedUser={fetchedUser} go={go}/> }
 					<Marks id='marks' go={go} member={member}/>
 				</View>
 			</AppRoot>
