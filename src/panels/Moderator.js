@@ -73,6 +73,8 @@ const Moderator = props => {
 		  .then(paste => {
 			setPopout(null)
 			setPaste(paste)
+			setSelectedTags([])
+			window.scrollTo(0, 0)
 		  })
 	}
 
@@ -159,11 +161,19 @@ const Moderator = props => {
 				{activeTab === 'tags' && <Group header={<Header mode="secondary">Разметка паст</Header>}>
 					<Div>
 					{paste && 
-						<Group header={<Header mode="secondary">{paste.id} Данную пасту оценили {paste.cnt} раз, рейтинг - {paste.rating} {paste.sender ? '\n, прислал ' + paste.sender.name : ''}</Header>}>
+						<Group>
+							<Div style={{color: 'grey', fontSize: 10, textAlign: 'center'}}>
+								<p>ID: {paste.id}</p>
+								<p>Оценок: {paste.cnt}</p>
+								<p>Рейтинг: {paste.rating}</p>
+								<p>Прислал: {paste.sender ? paste.sender.name : 'Автопарсинг'}</p>
+								<p>Опубликована: {paste.link_self ? paste.link_self : 'Нет'}</p>
+
+							</Div>
 							<Div>
 								<Card size="l" mode="shadow" style={{marginBottom:'1rem'}}>
 									<Div style={{padding: '.5rem', margin: 'auto'}}>
-										<p>{paste.clear_text}</p>
+										<p>{paste.text}</p>
 										{paste.pic &&
 											<img style={{width: "100%", height: "100%"}} src={paste.pic_link} />
 										}
@@ -182,7 +192,7 @@ const Moderator = props => {
 											<Checkbox
 												key={tag.value}
 												id={tag.value}
-												// checked={selectedTags.includes(this)}
+												checked={selectedTags.includes(tag.value)}
 												onChange={e => {
 														if (!selectedTags.includes(parseInt(e.target.id))) {
 															setSelectedTags([...selectedTags, parseInt(e.target.id)])
