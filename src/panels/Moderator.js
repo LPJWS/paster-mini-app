@@ -2,15 +2,15 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import bridge from '@vkontakte/vk-bridge';
 
-import { Panel, PanelHeader, PanelHeaderBack, Group, Header, View, ScreenSpinner, Div, Card, IconButton, Cell, Avatar, Tabs, TabsItem, FormItem, Checkbox, Button, FixedLayout, Snackbar} from '@vkontakte/vkui';
+import { Panel, PanelHeader, Group, Header, View, ScreenSpinner, Div, Card, IconButton, Tabs, TabsItem, FormItem, Checkbox, Button, Snackbar} from '@vkontakte/vkui';
 
 import { Icon28ViewOutline } from '@vkontakte/icons';
 import { Icon28DeleteOutline } from '@vkontakte/icons';
 import { Icon16Clear } from '@vkontakte/icons';
 import { Icon28CheckCircleOutline } from '@vkontakte/icons';
+import { Icon16ReplyOutline } from '@vkontakte/icons';
 
 const Moderator = props => {
-	const [pastes, setPastes] = useState([])
 	const [ paste, setPaste] = useState(null);
 	const [ suggest, setSuggest] = useState(null);
 	const [you, setYou] = useState(null);
@@ -20,6 +20,10 @@ const Moderator = props => {
 	const [tagsList, setTagsList] = useState([]);
 	const [selectedTags, setSelectedTags] = React.useState([]);
 	const [selectedTagsSuggest, setSelectedTagsSuggest] = React.useState([]);
+
+	function reply() {
+		bridge.send("VKWebAppShare", {"link": "vk.com/app7983387#" + paste.id});
+	}
 
 	function getYou() {
 		setPopout(<ScreenSpinner/>)
@@ -295,6 +299,11 @@ const Moderator = props => {
 									<Button stretched size="s" disabled={selectedTags.length == 0} mode="positive" onClick={
 										() => {tagPaste()}} before={<Icon28CheckCircleOutline/>}>
 										Отправить теги
+									</Button>
+								</Div>
+								<Div style={{paddingBottom: '9rem'}}>
+									<Button stretched size="l" style={{ marginRight: 8 }} mode="primary" onClick={() => {reply()}} before={<Icon16ReplyOutline/>}>
+										Поделиться
 									</Button>
 								</Div>
 							</Group>

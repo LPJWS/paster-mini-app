@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import PropTypes, { func } from 'prop-types';
 import bridge from '@vkontakte/vk-bridge';
 
-import { Panel, PanelHeader, Header, Button, Group, Cell, Div, ScreenSpinner,
-	 Text, Avatar, Card, Snackbar, FixedLayout, Separator, View,
+import { Panel, PanelHeader, Header, Button, Group, Div, ScreenSpinner,
+	Card, Snackbar, FixedLayout, View,
 	Epic, Tabbar, TabbarItem, IconButton } from '@vkontakte/vkui';
 import { Icon16ReplyOutline } from '@vkontakte/icons';
 import { Icon28Dice5Outline } from '@vkontakte/icons';
 import { Icon28ViewOutline } from '@vkontakte/icons';
-import { Icon16Mention } from '@vkontakte/icons';
-import { Icon24CupOutline } from '@vkontakte/icons';
 import { Icon16Favorite } from '@vkontakte/icons';
 import { Icon28HomeOutline } from '@vkontakte/icons';
 import { Icon28Flash } from '@vkontakte/icons';
@@ -31,6 +29,10 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 		}
 		setActiveStory(e.currentTarget.dataset.story);
 	}
+	const gopanel = e => {
+		setActiveStory(e.currentTarget.dataset.story);
+		getPasteById(e.currentTarget.dataset.payload)
+	};
 	
 	function getRandPaste() {
 		setPopout(<ScreenSpinner/>)
@@ -128,7 +130,7 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 	}
 
 	function reply() {
-		bridge.send("VKWebAppShare", {"link": paste.link});
+		bridge.send("VKWebAppShare", {"link": "vk.com/app7983387#" + paste.id});
 	}
 
 	useEffect(() => {
@@ -171,6 +173,15 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 					<PanelHeader>ПАСТЕР</PanelHeader>
 					{paste && 
 						<Group header={<Header mode="secondary">Данную пасту оценили {paste.cnt} раз, рейтинг - {paste.rating} {paste.sender ? '\n, прислал ' + paste.sender.name : ''}</Header>}>
+							<Div>
+								{
+									paste.tags.length 
+									? paste.tags.map((tag, index) => {
+										return <Button size='s' mode='commerce' style={{margin: '.1rem'}}>#{tag.name}</Button>
+									})
+									: <Button size='s' mode='commerce' style={{margin: '.1rem'}}>#Рандом</Button>
+								}
+							</Div>
 							<Div>
 								<Card size="l" mode="shadow" style={{marginBottom:'1rem'}}>
 									<Div style={{padding: '.5rem', margin: 'auto'}}>
@@ -295,7 +306,7 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 				</Panel>
 			</View>
 			
-			<Top id='top' activePanel='top' fetchedUser={fetchedUser} go={go}/>
+			<Top id='top' activePanel='top' fetchedUser={fetchedUser} go={go} gopanel={gopanel}/>
 			<Moderator id='moderator' activePanel='moderator' fetchedUser={fetchedUser} go={go}/>
 
 		</Epic>

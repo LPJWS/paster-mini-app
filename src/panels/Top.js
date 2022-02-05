@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import bridge from '@vkontakte/vk-bridge';
 
-import { Panel, PanelHeader, PanelHeaderBack, Group, Header, View, ScreenSpinner, Div, Card, Cell, Avatar, Tabs, TabsItem } from '@vkontakte/vkui';
+import { Panel, PanelHeader, Group, Header, View, ScreenSpinner, Div, Cell, Avatar, Tabs, TabsItem } from '@vkontakte/vkui';
 
 import './Top.css';
 
@@ -114,7 +114,7 @@ const Top = props => {
 										description={"Всего оценок: " + paste.cnt + ', рейтинг: ' + paste.rating}
 										before={<Cell disabled>{index+1}</Cell>}
 									>
-										{paste.anno} 
+										{paste.anno}
 									</Cell>
 								)
 							})
