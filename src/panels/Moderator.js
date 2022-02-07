@@ -248,6 +248,7 @@ const Moderator = props => {
 								<p>Прислал: {paste.sender ? paste.sender.name : 'Автопарсинг'}</p>
 								<p>Опубликована: {paste.link_self ? paste.link_self : 'Нет'}</p>
 								<p>Неразмеченных паст: {paste.untaged ? paste.untaged : 'Нет'}</p>
+								<p>Размеченных паст: {paste.tagged ? paste.tagged : 'Нет'}</p>
 							</Div>
 							<Div>
 								<Card size="l" mode="shadow" style={{marginBottom:'1rem'}}>
