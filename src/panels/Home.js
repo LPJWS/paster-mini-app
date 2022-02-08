@@ -13,8 +13,10 @@ import { Icon28HomeOutline } from '@vkontakte/icons';
 import { Icon28Flash } from '@vkontakte/icons';
 import { Icon16Clear } from '@vkontakte/icons';
 import { Icon28KeyOutline } from '@vkontakte/icons';
+import { Icon28ArticleOutline } from '@vkontakte/icons';
 
 import Top from './Top';
+import List from './List';
 import Moderator from './Moderator';
 
 const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
@@ -150,8 +152,14 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 				onClick={onStoryChange}
 				selected={activeStory === 'paste'}
 				data-story="paste"
-				text="Пасты"
+				text="Главная"
 			  ><Icon28HomeOutline /></TabbarItem>
+			  <TabbarItem
+				onClick={onStoryChange}
+				selected={activeStory === 'list'}
+				data-story="list"
+				text="Пасты"
+			  ><Icon28ArticleOutline /></TabbarItem>
 			  <TabbarItem
 				onClick={onStoryChange}
 				selected={activeStory === 'top'}
@@ -175,11 +183,10 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 						<Group header={<Header mode="secondary">Данную пасту оценили {paste.cnt} раз, рейтинг - {paste.rating} {paste.sender ? '\n, прислал ' + paste.sender.name : ''}</Header>}>
 							<Div>
 								{
-									paste.tags.length 
-									? paste.tags.map((tag, index) => {
+									paste.tags &&
+									paste.tags.map((tag, index) => {
 										return <Button size='s' mode='commerce' style={{margin: '.1rem'}}>#{tag.name}</Button>
 									})
-									: <Button size='s' mode='commerce' style={{margin: '.1rem'}}>#Рандом</Button>
 								}
 							</Div>
 							<Div>
@@ -307,6 +314,7 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 			</View>
 			
 			<Top id='top' activePanel='top' fetchedUser={fetchedUser} go={go} gopanel={gopanel}/>
+			<List id='list' activePanel='list' fetchedUser={fetchedUser} go={go} gopanel={gopanel}/>
 			<Moderator id='moderator' activePanel='moderator' fetchedUser={fetchedUser} go={go}/>
 
 		</Epic>
