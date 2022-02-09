@@ -189,9 +189,6 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 									})
 								}
 							</Div>
-							{/* <Counter size='s'>
-								Пашел нахуй
-							</Counter> */}
 							<Div>
 								<Card size="l" mode="shadow" style={{marginBottom:'1rem'}}>
 									<Div style={{padding: '.5rem', margin: 'auto'}}>
@@ -200,9 +197,20 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 											<img style={{width: "100%", height: "100%"}} src={paste.pic_link_self} onClick={async() => {
 												let res = await bridge.send("VKWebAppGetAuthToken", {"app_id": 7983387, "scope": "photos"});
 												let owner_id = paste.pic_self.split('_')[0].split('photo')[1]
-												let photo_id = paste.pic_self.split('_')[1].slice(0, -1)
-												let res2 = await bridge.send("VKWebAppCallAPIMethod", {"method": "photos.copy", "request_id": "32test", "params": {"owner_id": owner_id, "photo_id": photo_id, "v":"5.131", "access_token":res.access_token}});
-												if (!res2.error_type) {
+												let photo_id = paste.pic_self.split('_')[1]
+												let res2 = await bridge.send("VKWebAppCallAPIMethod", {"method": "photos.copy", "request_id": "32test", "params": {"owner_id": owner_id, "photo_id": photo_id, "v":"5.131", "access_token":res.access_token}})
+													.catch(error => {
+														console.log(error)
+														setSnackbar(
+															<Snackbar
+																onClose={() => setSnackbar(null)}
+																after={<IconButton onClick={() => setSnackbar(null)}><Icon16Clear /></IconButton>}
+															>
+																Произошла ошибка
+															</Snackbar>
+														)
+													})
+												if (res2 && !res2.error_type) {
 													setSnackbar(
 														<Snackbar
 															onClose={() => setSnackbar(null)}
@@ -228,9 +236,20 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 											<img style={{width: "100%", height: "100%"}} src={paste.pic_link} onClick={async() => {
 												let res = await bridge.send("VKWebAppGetAuthToken", {"app_id": 7983387, "scope": "photos"});
 												let owner_id = paste.pic.split('_')[0].split('photo')[1]
-												let photo_id = paste.pic.split('_')[1].slice(0, -1)
-												let res2 = await bridge.send("VKWebAppCallAPIMethod", {"method": "photos.copy", "request_id": "32test", "params": {"owner_id": owner_id, "photo_id": photo_id, "v":"5.131", "access_token":res.access_token}});
-												if (!res2.error_type) {
+												let photo_id = paste.pic.split('_')[1]
+												let res2 = await bridge.send("VKWebAppCallAPIMethod", {"method": "photos.copy", "request_id": "32test", "params": {"owner_id": owner_id, "photo_id": photo_id, "v":"5.131", "access_token":res.access_token}})
+													.catch(error => {
+														console.log(error)
+														setSnackbar(
+															<Snackbar
+																onClose={() => setSnackbar(null)}
+																after={<IconButton onClick={() => setSnackbar(null)}><Icon16Clear /></IconButton>}
+															>
+																Произошла ошибка
+															</Snackbar>
+														)
+													})
+												if (res2 && !res2.error_type) {
 													setSnackbar(
 														<Snackbar
 															onClose={() => setSnackbar(null)}
