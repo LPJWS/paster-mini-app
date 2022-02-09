@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import bridge from '@vkontakte/vk-bridge';
 
-import { Panel, PanelHeader, Group, Header, View, ScreenSpinner, Div, Cell, Avatar, Tabs, TabsItem } from '@vkontakte/vkui';
+import { Panel, PanelHeader, Group, Header, View, Counter, ScreenSpinner, Div, Cell, Avatar, Tabs, TabsItem } from '@vkontakte/vkui';
 
 import './Top.css';
 
@@ -114,7 +114,14 @@ const Top = props => {
 										description={"Всего оценок: " + paste.cnt + ', рейтинг: ' + paste.rating}
 										before={<Cell disabled>{index+1}</Cell>}
 									>
-										{paste.anno}
+										<Div style={{padding: '0'}}>
+											{paste.anno}
+										</Div>
+										<Div style={{display: "flex", paddingLeft: '0'}}>
+											{paste.tags.map((tag, index) => {
+												return <Counter size='s' mode='primary' style={{margin: '.1rem'}} key={tag.id}>#{tag.name}</Counter>
+											})}
+										</Div>
 									</Cell>
 								)
 							})

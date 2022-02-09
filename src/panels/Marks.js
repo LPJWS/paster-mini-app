@@ -43,7 +43,7 @@ const Marks = props => {
 		<View activePanel={props.id} popout={popout}>
 			<Panel id={props.id}>
 				<PanelHeader
-					left={<PanelHeaderBack onClick={props.go} data-to="top"/>}
+					left={<PanelHeaderBack onClick={props.go} data-to="home" data-story="top"/>}
 				>
 					Оценки
 				</PanelHeader>

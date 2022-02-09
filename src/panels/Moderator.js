@@ -249,6 +249,7 @@ const Moderator = props => {
 								<p>Опубликована: {paste.link_self ? paste.link_self : 'Нет'}</p>
 								<p>Неразмеченных паст: {paste.untaged ? paste.untaged : 'Нет'}</p>
 								<p>Размеченных паст: {paste.tagged ? paste.tagged : 'Нет'}</p>
+								<p>Неопубликованных паст: {paste.unposted ? paste.unposted : 'Нет'}</p>
 							</Div>
 							<Div>
 								<Card size="l" mode="shadow" style={{marginBottom:'1rem'}}>

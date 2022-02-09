@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import bridge from '@vkontakte/vk-bridge';
 
-import { Panel, PanelHeader, Group, Header, View, ScreenSpinner, Div, Cell, Avatar, FormItem, Select, Button } from '@vkontakte/vkui';
+import { Panel, PanelHeader, Group, Header, View, ScreenSpinner, Counter, Div, Cell, Avatar, FormItem, Select, Button } from '@vkontakte/vkui';
 
 const List = props => {
 	const [pastes, setPastes] = useState([])
@@ -119,7 +119,14 @@ const List = props => {
 										description={"Всего оценок: " + paste.cnt + ', рейтинг: ' + paste.rating}
 										before={<Cell disabled>{((page-1) * 20) + index+1}</Cell>}
 									>
-										{paste.anno}
+										<Div style={{padding: '0'}}>
+											{paste.anno}
+										</Div>
+										<Div style={{display: "flex", paddingLeft: '0'}}>
+											{paste.tags.map((tag, index) => {
+												return <Counter size='s' mode='primary' style={{margin: '.1rem'}} key={tag.id}>#{tag.name}</Counter>
+											})}
+										</Div>
 									</Cell>
 								)
 							})
@@ -134,6 +141,7 @@ const List = props => {
 									onClick={e => {
 										setPage(page_)
 									}}
+									key={page_}
 								>
 									{page_}
 								</Button>
