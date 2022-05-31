@@ -4,6 +4,8 @@ import bridge from '@vkontakte/vk-bridge';
 
 import { Panel, PanelHeader, Group, Header, View, ScreenSpinner, Counter, Div, Cell, Avatar, FormItem, Select, Button } from '@vkontakte/vkui';
 
+import Banner from './Banner';
+
 const List = props => {
 	const [pastes, setPastes] = useState([])
 	const [you, setYou] = useState(null);
@@ -90,6 +92,7 @@ const List = props => {
 				<PanelHeader>
 					Пасты
 				</PanelHeader>
+				<Banner />
 				<Group header={<Header mode="secondary">База паст</Header>}>
 					<FormItem top="Категория">
 						<Select

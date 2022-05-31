@@ -5,6 +5,7 @@ import bridge from '@vkontakte/vk-bridge';
 import { Panel, PanelHeader, Group, Header, View, Counter, ScreenSpinner, Div, Cell, Avatar, Tabs, TabsItem } from '@vkontakte/vkui';
 
 import './Top.css';
+import Banner from './Banner';
 
 const Top = props => {
 	const [pastes, setPastes] = useState([])
@@ -75,6 +76,7 @@ const Top = props => {
 				<PanelHeader>
 					ТОП
 				</PanelHeader>
+				<Banner />
 				<Tabs>
 					<TabsItem
 						onClick={() => setActiveTab('paste')}

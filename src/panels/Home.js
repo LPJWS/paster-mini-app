@@ -4,7 +4,7 @@ import bridge from '@vkontakte/vk-bridge';
 
 import { Panel, PanelHeader, Header, Button, Group, Div, ScreenSpinner,
 	Card, Snackbar, FixedLayout, View,
-	Epic, Tabbar, TabbarItem, IconButton, Counter } from '@vkontakte/vkui';
+	Epic, Tabbar, TabbarItem, IconButton, Counter, PromoBanner } from '@vkontakte/vkui';
 import { Icon16ReplyOutline } from '@vkontakte/icons';
 import { Icon28Dice5Outline } from '@vkontakte/icons';
 import { Icon28ViewOutline } from '@vkontakte/icons';
@@ -18,6 +18,7 @@ import { Icon28ArticleOutline } from '@vkontakte/icons';
 import Top from './Top';
 import List from './List';
 import Moderator from './Moderator';
+import Banner from './Banner';
 
 const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 	const [ paste, setPaste] = useState(null);
@@ -179,6 +180,7 @@ const Home = ({ id, go, fetchedUser, pastePreloaded }) => {
 			<View id='paste' activePanel='paste' popout={popout}>
 				<Panel id='paste'>
 					<PanelHeader>ПАСТЕР</PanelHeader>
+					<Banner />
 					{paste && 
 						<Group header={<Header mode="secondary">Данную пасту оценили {paste.cnt} раз, рейтинг - {paste.rating} {paste.sender ? '\n, прислал ' + paste.sender.name : ''}</Header>}>
 							<Div style={{display: "flex"}}>
